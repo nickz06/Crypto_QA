@@ -1,3 +1,3 @@
 # Crypto_QA
-# Use pytest/unittest PageObject Html/Allure Report
+# Use pytest PageObject Html/Allure Report
 
