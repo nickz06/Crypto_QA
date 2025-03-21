@@ -2,28 +2,25 @@ import json
 import requests
 
 
-def test_API(self):
-'''API verification'''
-
-    api_url = "https://www.szse.cn/api/marketData/lookup?code=000001"
+api_url = "https://www.szse.cn/api/marketData/lookup?code=000001"
     
-    headers = {
-        "Accept-Language": "en-US,en;q=0.9",  # Preferred language
+headers = {
+    "Accept-Language": "en-US,en;q=0.9",  # Preferred language
     }
     
-    response = requests.get(api_url, headers=headers)
+response = requests.get(api_url, headers=headers)
     
-    if response.status_code == 200:
-        print("Request was successful.")
-    else:
-        print(f"Failed to retrieve data: {response.status_code}")
+if response.status_code == 200:
+    print("Request was successful.")
+else:
+    print(f"Failed to retrieve data: {response.status_code}")
     
-    data = response.json()
+data = response.json()
     
-    high = data['marketData']['high']
-    low = data['marketData']['low']
+high = data['marketData']['high']
+low = data['marketData']['low']
     
-    if high > low:
-        print("High is greater than Low")
-    else:
-        print("Low is greater than High")
+if high > low:
+    print("High is greater than Low")
+else:
+    print("Low is greater than High")
