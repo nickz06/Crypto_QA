@@ -1,0 +1,38 @@
+from appium import webdriver
+from appium.webdriver.common.appiumby import AppiumBy
+from datetime import datetime, timedelta
+import unittest
+
+class AppTest(unittest.TestCase):
+    def setUp(self):
+        # Desired Capabilities
+        self.desired_caps = {
+            "platformName": "ios", 
+            "deviceName": "emulator-5554", 
+            "appPackage": "XXX",  
+            "appActivity": "", 
+            "automationName": "uiautotest" 
+        }
+        self.driver = webdriver.Remote("http://localhost:4723/wd/hub", self.desired_caps)
+
+    def test_verify_first_day_forecast(self):
+        # Navigate to the 9-day forecast screen
+        forecast_button = self.driver.find_element(AppiumBy.ID, "")
+        forecast_button.click()
+
+        # Extract the 1st day's weather forecast date
+        first_day_date = self.driver.find_element(AppiumBy.ID, "")
+        extracted_date = first_day_date.text
+
+        # Get today's date and format it
+        today = datetime.now()
+        expected_date = today.strftime("%Y-%m-%d") 
+
+        # Verify the date
+        self.assertEqual(extracted_date, expected_date, f"Date mismatch! Expected: {expected_date}, Actual: {extracted_date}")
+
+    def tearDown(self):
+        self.driver.quit()
+
+if __name__ == "__main__":
+    unittest.main()
